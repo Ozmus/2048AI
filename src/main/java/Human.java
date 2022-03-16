@@ -1,8 +1,6 @@
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.sql.SQLOutput;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +8,56 @@ import org.apache.commons.math3.util.Pair;
 
 public class Human {
 
-    public Board makeMove(Board input) {
+    public Board makeMove(Board input) throws Exception{
+        int[] values = new int[4];
+        Move[] keys = new Move[4];
+        Move move = null;
+
+        keys[0] = Move.LEFT;
+        keys[1] = Move.UP;
+        keys[2] = Move.DOWN;
+        keys[3] = Move.RIGHT;
+
+        values[0] = calculateScore(input.move(Move.LEFT));
+        values[1] = calculateScore(input.move(Move.UP));
+        values[2] = calculateScore(input.move(Move.DOWN));
+        values[3] = calculateScore(input.move(Move.RIGHT));
+
+        int maxValue = 0, indexMax = -1, tempInt = 0;
+        Move  tempMove;
+        for(int i = 0; i < 4; i++){
+            for(int j = i; j < 4; j++){
+                if( values[j] >= maxValue){
+                    indexMax = j;
+                    maxValue = values[j];
+                }
+            }
+            tempInt = values[i];
+            tempMove = keys[i];
+            values[i] = values[indexMax];
+            keys[i] = keys[indexMax];
+            values[indexMax] = tempInt;
+            keys[indexMax] = tempMove;
+            maxValue = 0;
+        }
+
+        for(int i = 0; i<4; i++) {
+            System.out.println(i + ": " + keys[i] + ": " + values[i]);
+        }
+
+        for(int i = 0; i<4; i++) {
+            if(!input.move(keys[i]).equals(input)){
+                move = keys[i];
+                break;
+            }
+        }
+
+
+
+        //Check if move can be done
+        //Move move = findMaxMove(left, up, down, right);
+
+
         // For each move in MOVE
         //   Generate board from move
         //   Generate Score for Board
@@ -33,13 +80,28 @@ public class Human {
         //     Generate board from move
         //     Generate score for board
         //   Return the best generated score
+        if(move == null){
+            throw new Exception("no moves available");
+        }
+        return input.move(move);
+    }
 
-        return Arrays.stream(Move.values())
-                .parallel()
-                .map(input::move)
-                .filter(board -> !board.equals(input))
-                .max(Comparator.comparingInt(board -> generateScore(board, 0)))
-                .orElse(input);
+
+    private Move findMaxMove(int left, int up, int down, int right){
+        Move result;
+        if(left >= right && left >= up && left >= down){
+            result = Move.LEFT;
+        }
+        else if(right >= left && right >= up && right >= down){
+            result = Move.RIGHT;
+        }
+        else if(up >= right && up >= left && up >= down){
+            result = Move.UP;
+        }
+        else{
+            result = Move.DOWN;
+        }
+        return result;
     }
 
     private int generateScore(Board board, int depth) {
@@ -53,21 +115,21 @@ public class Human {
                 .flatMap(cell -> Stream.of(new Pair<>(cell, 2), new Pair<>(cell, 4)))
                 .mapToInt(move -> {
                     Board newBoard = board.placeTile(move.getFirst(), move.getSecond());
-                    int boardScore = calculateScore(newBoard, depth + 1);
+                    int boardScore = calculateScore(newBoard);
                     int calculatedScore = (int) (boardScore * (move.getSecond() == 2 ? 0.9 : 0.1));
                     return calculatedScore;
                 })
                 .sum();
     }
 
-    private int calculateScore(Board board, int depth) {
-        return Arrays.stream(Move.values())
-                .parallel()
-                .map(board::move)
-                .filter(moved -> !moved.equals(board))
-                .mapToInt(newBoard -> generateScore(newBoard, depth))
-                .max()
-                .orElse(0);
+    private int calculateScore(Board board) {
+        //H = A x E - B x D - C x P   | A=4096, B=10 and C=10.
+        int A=4096, B=10, C=10;
+        int E = board.emptyCells().size();
+        int D = board.numberOfDiffentNeighbouringNumbers();
+        int P = board.sumOfDistancesToClosestBorder();
+
+        return  A * E - B * D - C * P;
     }
 
     private int calculateFinalScore(Board board) {

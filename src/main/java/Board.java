@@ -67,6 +67,74 @@ public class Board {
         return result;
     }
 
+    public int numberOfDiffentNeighbouringNumbers(){
+        int center, left, right, bottom, top;
+        int result = 0;
+        for (int x = 0; x < board.length; ++x) {
+            for (int y = 0; y < board[x].length; ++y) {
+                center = board[x][y];
+                if(center != 0) {
+                    if (x - 1 > 0) {
+                        left = board[x - 1][y];
+                        if (center != left && left != 0) {
+                            result += 1;
+                        }
+                    }
+                    if (x + 1 < board.length) {
+                        right = board[x + 1][y];
+                        if (center != right && right != 0) {
+                            result += 1;
+                        }
+                    }
+                    if (y - 1 > 0 && y - 1 < board[x].length) {
+                        bottom = board[x][y - 1];
+                        if (center != bottom && bottom != 0) {
+                            result += 1;
+                        }
+                    }
+                    if (y + 1 < board[x].length) {
+                        top = board[x][y + 1];
+                        if (center != top && top != 0) {
+                            result += 1;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public int sumOfDistancesToClosestBorder(){
+        int tile;
+        int result = 0;
+        for (int x = 0; x < board.length; ++x) {
+            for (int y = 0; y < board[x].length; ++y) {
+                tile = board[x][y];
+                if(tile != 0) {
+                    if(x != 0 && x != 3 && y != 0 && y != 3){
+                        result += 1;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    private ArrayList<int[]> findTile(int num) {
+        ArrayList<int[]> result = new ArrayList<>();
+        int[] tile = new int[2];
+        int tileNum = 0;
+        for (int x = 0; x < board.length; ++x) {
+            for (int y = 0; y < board[x].length; ++y) {
+                tileNum = board[x][y];
+                if(tileNum == num) {
+                    result.add(new int[]{ x, y });
+                }
+            }
+        }
+        return result;
+    }
+
     public Board placeTile(Cell cell, int number) {
         if (!isEmpty(cell)) {
             throw new IllegalArgumentException("That cell is not empty");
