@@ -123,13 +123,15 @@ public class Human {
     }
 
     private int calculateScore(Board board) {
-        //H = A x E - B x D - C x P   | A=4096, B=10 and C=10.
-        int A=4096, B=10, C=10;
+        //H = A x E - B x D - C x P   | A=4096, B=10 and C=10. check max tile if is in corner add high numbers in same edge
+        int X=4096, Y=10, Z=10, W = 1000, K = 1000;
         int E = board.emptyCells().size();
         int D = board.numberOfDiffentNeighbouringNumbers();
         int P = board.sumOfDistancesToClosestBorder();
+        int C = board.isMaxTileInCorner();
+        int H = board.isHighNumbersInSameEdge();
 
-        return  A * E - B * D - C * P;
+        return  X * E - Y * D - Z * P + W * C + H * K;
     }
 
     private int calculateFinalScore(Board board) {

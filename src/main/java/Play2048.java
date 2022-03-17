@@ -85,7 +85,7 @@ public class Play2048 extends JFrame{
             //printBoardGUI(board);
 
             /*try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
             catch (Exception e){
 

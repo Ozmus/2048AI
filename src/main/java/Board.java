@@ -120,6 +120,47 @@ public class Board {
         return result;
     }
 
+    public int isHighNumbersInSameEdge(){
+        int max = maxTile(), result = 0;
+        if(board[0][0] == max){
+            result = -1 * (board[0][0] - board[1][0] - board[2][0] - board[3][0]);
+        }
+        if(board[0][3] == max ){
+            result = -1 * (board[0][3] - board[1][3] - board[2][3] - board[0][3]);
+        }
+        if(board[3][0] == max){
+            result = -1 * (board[3][0] - board[0][0] - board[1][0] - board[2][0]);
+        }
+        if(board[3][3] == max ){
+            result = -1 * (board[3][3] - board[1][3] - board[2][3] - board[0][3]);
+        }
+
+        return result;
+    }
+
+    public int isMaxTileInCorner(){
+        int max = maxTile(), result = 0;
+        if(board[0][0] == max
+            || board[0][3] == max
+            || board[3][0] == max
+            || board[3][3] == max ){
+            result = max;
+        }
+        return result;
+    }
+
+    private int maxTile(){
+        int max = 0, tile;
+        for (int x = 0; x < board.length; ++x) {
+            for (int y = 0; y < board[x].length; ++y) {
+                tile = board[x][y];
+                if(tile >= max) {
+                    max = tile;
+                }
+            }
+        }
+        return max;
+    }
     private ArrayList<int[]> findTile(int num) {
         ArrayList<int[]> result = new ArrayList<>();
         int[] tile = new int[2];
