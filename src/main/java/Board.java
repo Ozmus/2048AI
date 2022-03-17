@@ -124,15 +124,51 @@ public class Board {
         int max = maxTile(), result = 0;
         if(board[0][0] == max){
             result = -1 * (board[0][0] - 3 * board[1][0] - 2 * board[2][0] - board[3][0]);
+            if(board[3][0] < board[3][1] ){
+                result -= max / 10;
+            }
+            if(board[2][0] <  board[2][1] ){
+                result -= max / 10;
+            }
+            if(board[1][0] < board[1][1] ){
+                result -= max / 10;
+            }
         }
         if(board[0][3] == max ){
-            result = -1 * (board[0][3] - 3 * board[1][3] - 2 * board[2][3] - board[0][3]);
+            result = -1 * (board[0][3] - 3 * board[1][3] - 2 * board[2][3] - board[3][3]);
+            if(board[1][3] < board[1][2] ){
+                result -= max / 10;
+            }
+            if(board[2][3] <  board[2][2] ){
+                result -= max / 10;
+            }
+            if(board[3][3] < board[3][2] ){
+                result -= max / 10;
+            }
         }
         if(board[3][0] == max){
             result = -1 * (board[3][0] - 3 * board[2][0] - 2 * board[1][0] - board[0][0]);
+            if(board[2][0] < board[2][1] ){
+                result -= max / 10;
+            }
+            if(board[1][0] <  board[1][1] ){
+                result -= max / 10;
+            }
+            if(board[0][0] < board[0][1] ){
+                result -= max / 10;
+            }
         }
         if(board[3][3] == max ){
             result = -1 * (board[3][3] - 3 * board[2][3] -  2 * board[1][3] - board[0][3]);
+            if(board[2][3] < board[2][2] ){
+                result -= max / 10;
+            }
+            if(board[1][3] <  board[1][2] ){
+                result -= max / 10;
+            }
+            if(board[0][3] < board[0][2] ){
+                result -= max / 10;
+            }
         }
 
         return result;
@@ -149,7 +185,7 @@ public class Board {
         return result;
     }
 
-    private int maxTile(){
+    public int maxTile(){
         int max = 0, tile;
         for (int x = 0; x < board.length; ++x) {
             for (int y = 0; y < board[x].length; ++y) {

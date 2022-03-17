@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Play2048 extends JFrame{
     private static final int SIZE = 4;
@@ -62,27 +64,29 @@ public class Play2048 extends JFrame{
         Computer computer = new Computer();
         Human human = new Human();
 
-        // The computer has two moves first
-        System.out.println("Setup");
-        System.out.println("=====");
-        for (int i = 0; i < INITIAL_NUMBERS; ++i) {
-            board = computer.makeMove(board);
-        }
+        Map<Integer, Integer> result = new HashMap<>();
+        for(int k=0; k < 100; k++) {
+            // The computer has two moves first
+            board = new Board(SIZE);
+            System.out.println("Setup");
+            System.out.println("=====");
+            for (int i = 0; i < INITIAL_NUMBERS; ++i) {
+                board = computer.makeMove(board);
+            }
 
-        printBoard(board);
-        do {
-            try {
-                board = human.makeMove(board);
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
-                stop = true;
-                break;
-            }
-            System.out.println("\nHuman move");
-            System.out.println("==========");
-            printBoard(board);
-            //printBoardGUI(board);
+            //printBoard(board);
+            do {
+                try {
+                    board = human.makeMove(board);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    stop = true;
+                    break;
+                }
+                //System.out.println("\nHuman move");
+                //System.out.println("==========");
+                //printBoard(board);
+                //printBoardGUI(board);
 
             /*try {
                 Thread.sleep(100);
@@ -91,21 +95,29 @@ public class Play2048 extends JFrame{
 
             }*/
 
-            board = computer.makeMove(board);
-            System.out.println("\nComputer move");
-            System.out.println("=============");
-            printBoard(board);
-            //printBoardGUI(board);
+                board = computer.makeMove(board);
+                //System.out.println("\nComputer move");
+                //System.out.println("=============");
+                //printBoard(board);
+                //printBoardGUI(board);
            /*try {
                 Thread.sleep(2500);
             }
             catch (Exception e){
 
             }*/
-        } while (!stop); // ADD ALSO NO available move
-        printBoardGUI(board);
-        System.out.println("\nFinal Score: " + board.getScore());
-
+            } while (!stop); // ADD ALSO NO available move
+            //printBoardGUI(board);
+            stop = false;
+            try {
+                result.put(board.maxTile(), result.get(board.maxTile()) + 1);
+            }
+            catch (Exception e){
+                result.put(board.maxTile(), 1);
+            }
+        }
+        //System.out.println("\nFinal Score: " + board.getScore());
+        System.out.println(result);
     }
 
     private static void printBoard(Board board) {
