@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +56,42 @@ public class Play2048 extends JFrame{
         add(label16);
     }
 
+    /*private void setColor(int num, JButton button){
+        if(num == 0){
+
+        }
+        else if(num == 2){
+
+        }
+        else if(num == 4){
+
+        }
+        else if(num == 8){
+
+        }
+        else if(num == 16){
+
+        }
+        else if(num == 32){
+
+        }
+        else if(num == 64){
+
+        }
+        else if(num == 128){
+
+        }
+        else if(num == 128){
+
+        }else if(num == 128){
+
+        }
+        else if(num == 128){
+
+        }
+
+    }*/
+
     public static void main(String[] args) {
         boolean stop = false;
 
@@ -65,11 +101,11 @@ public class Play2048 extends JFrame{
         Human human = new Human();
 
         Map<Integer, Integer> result = new HashMap<>();
-        for(int k=0; k < 100; k++) {
+        //for(int k=0; k < 1000; k++) {
             // The computer has two moves first
             board = new Board(SIZE);
-            System.out.println("Setup");
-            System.out.println("=====");
+            //System.out.println("Setup");
+            //System.out.println("=====");
             for (int i = 0; i < INITIAL_NUMBERS; ++i) {
                 board = computer.makeMove(board);
             }
@@ -79,35 +115,35 @@ public class Play2048 extends JFrame{
                 try {
                     board = human.makeMove(board);
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
                     stop = true;
                     break;
                 }
                 //System.out.println("\nHuman move");
                 //System.out.println("==========");
                 //printBoard(board);
-                //printBoardGUI(board);
+                printBoardGUI(board);
 
-            /*try {
-                Thread.sleep(100);
+            try {
+                Thread.sleep(50);
             }
             catch (Exception e){
 
-            }*/
+            }
 
                 board = computer.makeMove(board);
                 //System.out.println("\nComputer move");
                 //System.out.println("=============");
                 //printBoard(board);
-                //printBoardGUI(board);
-           /*try {
-                Thread.sleep(2500);
+                printBoardGUI(board);
+           try {
+                Thread.sleep(250);
             }
             catch (Exception e){
 
-            }*/
+            }
             } while (!stop); // ADD ALSO NO available move
-            //printBoardGUI(board);
+            printBoardGUI(board);
             stop = false;
             try {
                 result.put(board.maxTile(), result.get(board.maxTile()) + 1);
@@ -115,7 +151,7 @@ public class Play2048 extends JFrame{
             catch (Exception e){
                 result.put(board.maxTile(), 1);
             }
-        }
+        //}
         //System.out.println("\nFinal Score: " + board.getScore());
         System.out.println(result);
     }

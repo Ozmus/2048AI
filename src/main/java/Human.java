@@ -41,9 +41,9 @@ public class Human {
             maxValue = 0;
         }
 
-        for(int i = 0; i<4; i++) {
+        /*for(int i = 0; i<4; i++) {
             System.out.println(i + ": " + keys[i] + ": " + values[i]);
-        }
+        }*/
 
         for(int i = 0; i<4; i++) {
             if(!input.move(keys[i]).equals(input)){
