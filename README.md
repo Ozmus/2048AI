@@ -1,5 +1,5 @@
 # 2048AI
-This project is developed by Ahmet Özmüş. For educational purposses.
+This project is developed by Ahmet Özmüş for educational purposes.
 e-mail: ahmetozmus2018@gmail.com
 
 Flow of game and the basics are copied from https://github.com/eugenp/tutorials/tree/master/algorithms-miscellaneous-6/src/main/java/com/baeldung/algorithms/play2048 .
