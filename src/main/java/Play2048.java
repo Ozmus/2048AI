@@ -24,73 +24,95 @@ public class Play2048 extends JFrame{
         }*/
         JButton label1 = new JButton(board.getCell(new Cell(0,0))== 0 ? "" : Integer.toString(board.getCell(new Cell(0,0))));
         add(label1);
+        setColor(board.getCell(new Cell(0,0)), label1);
         JButton label2 = new JButton(board.getCell(new Cell(1,0))== 0 ? "" :Integer.toString(board.getCell(new Cell(1,0))));
         add(label2);
+        setColor(board.getCell(new Cell(1,0)), label2);
         JButton label3 = new JButton(board.getCell(new Cell(2,0))== 0 ? "" : Integer.toString(board.getCell(new Cell(2,0))));
         add(label3);
+        setColor(board.getCell(new Cell(2,0)), label3);
         JButton label4 = new JButton(board.getCell(new Cell(3,0))== 0 ? "" : Integer.toString(board.getCell(new Cell(3,0))));
         add(label4);
+        setColor(board.getCell(new Cell(3,0)), label4);
         JButton label5 = new JButton(board.getCell(new Cell(0,1))== 0 ? "" : Integer.toString(board.getCell(new Cell(0,1))));
         add(label5);
+        setColor(board.getCell(new Cell(0,1)), label5);
         JButton label6 = new JButton(board.getCell(new Cell(1,1))== 0 ? "" : Integer.toString(board.getCell(new Cell(1,1))));
         add(label6);
+        setColor(board.getCell(new Cell(1,1)), label6);
         JButton label7 = new JButton(board.getCell(new Cell(2,1))== 0 ? "" : Integer.toString(board.getCell(new Cell(2,1))));
         add(label7);
+        setColor(board.getCell(new Cell(2,1)), label7);
         JButton label8 = new JButton(board.getCell(new Cell(3,1))== 0 ? "" : Integer.toString(board.getCell(new Cell(3,1))));
         add(label8);
+        setColor(board.getCell(new Cell(3,1)), label8);
         JButton label9 = new JButton(board.getCell(new Cell(0,2))== 0 ? "" : Integer.toString(board.getCell(new Cell(0,2))));
         add(label9);
+        setColor(board.getCell(new Cell(0,2)), label9);
         JButton label10 = new JButton(board.getCell(new Cell(1,2))== 0 ? "" : Integer.toString(board.getCell(new Cell(1,2))));
         add(label10);
+        setColor(board.getCell(new Cell(1,2)), label10);
         JButton label11 = new JButton(board.getCell(new Cell(2,2))== 0 ? "" : Integer.toString(board.getCell(new Cell(2,2))));
         add(label11);
+        setColor(board.getCell(new Cell(2,2)), label11);
         JButton label12 = new JButton(board.getCell(new Cell(3,2))== 0 ? "" : Integer.toString(board.getCell(new Cell(3,2))));
         add(label12);
+        setColor(board.getCell(new Cell(3,2)), label12);
         JButton label13 = new JButton(board.getCell(new Cell(0,3))== 0 ? "" : Integer.toString(board.getCell(new Cell(0,3))));
         add(label13);
+        setColor(board.getCell(new Cell(0,3)), label13);
         JButton label14 = new JButton(board.getCell(new Cell(1,3))== 0 ? "" : Integer.toString(board.getCell(new Cell(1,3))));
         add(label14);
+        setColor(board.getCell(new Cell(1,3)), label14);
         JButton label15 = new JButton(board.getCell(new Cell(2,3))== 0 ? "" : Integer.toString(board.getCell(new Cell(2,3))));
         add(label15);
+        setColor(board.getCell(new Cell(2,3)), label15);
         JButton label16 = new JButton(board.getCell(new Cell(3,3))== 0 ? "" : Integer.toString(board.getCell(new Cell(3,3))));
         add(label16);
+        setColor(board.getCell(new Cell(3,3)), label16);
     }
 
-    /*private void setColor(int num, JButton button){
+    private void setColor(int num, JButton button){
         if(num == 0){
-
+            button.setBackground(Color.lightGray);
         }
         else if(num == 2){
-
+            button.setBackground(Color.white);
         }
         else if(num == 4){
-
+            button.setBackground(Color.gray);
         }
         else if(num == 8){
-
+            button.setBackground(Color.yellow);
         }
         else if(num == 16){
-
+            button.setBackground(Color.orange);
         }
         else if(num == 32){
-
+            button.setBackground(Color.PINK);
         }
         else if(num == 64){
-
+            button.setBackground(Color.RED);
         }
         else if(num == 128){
-
+            button.setBackground(Color.yellow);
         }
-        else if(num == 128){
-
-        }else if(num == 128){
-
+        else if(num == 256){
+            button.setBackground(Color.yellow);
+        }else if(num == 512){
+            button.setBackground(Color.yellow);
         }
-        else if(num == 128){
-
+        else if(num == 1024){
+            button.setBackground(Color.orange);
+        }
+        else if(num == 2048){
+            button.setBackground(Color.orange);
+        }
+        else{
+            button.setBackground(Color.MAGENTA);
         }
 
-    }*/
+    }
 
     public static void main(String[] args) {
         boolean stop = false;
